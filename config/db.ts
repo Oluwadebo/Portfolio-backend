@@ -2,13 +2,8 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
-// Load environment variables
 dotenv.config();
 
-/**
- * Direct Connection to MongoDB Database Instance
- * Uses Mongoose schema compiler mappings and logs errors gracefully.
- */
 export const connectDB = async (): Promise<typeof mongoose | null> => {
   const mongoUri = process.env.MONGO_URI;
 
@@ -24,7 +19,8 @@ export const connectDB = async (): Promise<typeof mongoose | null> => {
     const conn = await mongoose.connect(mongoUri, {
       autoIndex: true, // Auto-build schema indexes for fast search mappings
     });
-    console.log(`[Database Connection Success]: Connected securely to MongoDB Host: ${conn.connection.host}`);
+    // console.log(`[Database Connection Success]: Connected securely to MongoDB Host: ${conn.connection.host}`);
+    console.log(`Database Connection Success`);
     return conn;
   } catch (error: any) {
     console.error(`[Database Local Connection Exception]: ${error.message || error}`);

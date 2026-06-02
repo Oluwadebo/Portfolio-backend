@@ -26,8 +26,11 @@ const PORT = process.env.BACKEND_PORT || 5000;
 app.use(helmet());
 app.use(
   cors({
-    origin: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
-    credentials: true,
+    origin: [
+  "http://localhost:3000",
+  process.env.ALLOWED_ORIGIN || "",
+  process.env.NEXT_PUBLIC_APP_URL || "",
+].filter(Boolean),
   }),
 );
 app.use(morgan("dev"));
