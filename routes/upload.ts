@@ -1,7 +1,7 @@
 import { Router } from "express";
 import multer from "multer";
 import { uploadImage } from "../controllers/upload";
-import { authenticate } from "../middleware/auth.middleware";
+import { authenticate } from "../middleware/authmiddleware";
 
 const storage = multer.memoryStorage();
 const upload = multer({

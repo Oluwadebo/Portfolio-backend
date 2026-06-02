@@ -1,9 +1,8 @@
 import { Router } from "express";
 import { fetchPreview } from "../controllers/view";
-import { authenticate } from "../middleware/auth.middleware";
+import { authenticate } from "../middleware/authmiddleware";
 
 const router = Router();
-
 
 // POST /api/preview  { url: "https://yourproject.com" }
 // Returns { image, title, description, source }
