@@ -1,22 +1,17 @@
 import { Request, Response } from "express";
 import Settings from "../models/Settings";
 
-console.log("i am in setting");
-
 // ─── Get settings (public) ──────────────────────────
 export const getSettings = async (_req: Request, res: Response) => {
   try {
     let settings = await Settings.findOne();
 
-    // If no settings exist yet, create defaults
     if (!settings) {
       settings = await Settings.create({});
     }
 
     return res.json(settings);
   } catch (err) {
-    console.error(err);
-    console.error("SETTINGS ERROR:", err);
     return res.status(500).json({ error: "Failed to fetch settings" });
   }
 };
@@ -48,7 +43,6 @@ export const updateSettings = async (req: Request, res: Response) => {
     );
     return res.json(settings);
   } catch (err) {
-    console.error(err);
     return res.status(500).json({ error: "Failed to update settings" });
   }
 };

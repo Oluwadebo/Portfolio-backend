@@ -57,14 +57,6 @@ async function fetchOGPreview(url: string): Promise<Partial<PreviewResult>> {
 function getScreenshotUrl(url: string): string {
   return `https://image.thum.io/get/width/1200/crop/630/${url}`;
 }
-// function getScreenshotUrl(url: string): string {
-//   const encoded = Buffer.from(url).toString("base64");
-//   return `https://ogs.io/api/?url=${url}&screenshot=true`;
-// }
-// function getScreenshotUrl(url: string): string {
-//   // Works for all Vercel deployed sites
-//   return `https://og-image.vercel.app/**${encodeURIComponent(url)}**.png`;
-// }
 // ─── Fallback: Microlink API (free, no key needed) ──
 async function fetchMicrolinkPreview(
   url: string,
@@ -110,7 +102,7 @@ export async function getURLPreview(
         };
       }
     } catch (err) {
-      console.warn(`[preview] GitHub fetch failed:`, (err as Error).message);
+
     }
   }
   //  Try OG tags first
@@ -127,10 +119,7 @@ export async function getURLPreview(
       };
     }
   } catch (err) {
-    console.warn(
-      `[preview] OG fetch failed for ${url}:`,
-      (err as Error).message,
-    );
+
   }
 
   //  Fallback to Microlink
@@ -147,14 +136,9 @@ export async function getURLPreview(
       };
     }
   } catch (err) {
-    console.warn(
-      `[preview] Microlink failed for ${url}:`,
-      (err as Error).message,
-    );
+
   }
 
-  //  Nothing found
-  console.warn(`[preview] No image found for ${url}`);
   return {
     image: null,
     title: null,
@@ -184,14 +168,6 @@ async function fetchGitHubPreview(
     try {
       const og = await fetchOGPreview(data.homepage);
       image = og.image || null;
-      // fallback to microlink
-      // if (!image) {
-      //   const ml = await fetchMicrolinkPreview(data.homepage);
-      //   image = ml.image || null;
-      // }
-      // if (!image) {
-      //   image = `https://api.screenshotone.com/take?url=${encodeURIComponent(data.homepage)}&viewport_width=1200&viewport_height=630&format=jpg&image_quality=80`;
-      // }
       if (!image) {
         image = `https://image.thum.io/get/width/1200/crop/630/${data.homepage}`;
       }

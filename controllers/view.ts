@@ -19,7 +19,6 @@ export const fetchPreview = async (req: Request, res: Response) => {
     const preview = await getURLPreview(url);
     return res.json(preview);
   } catch (err) {
-    console.error("[preview] Unexpected error:", err);
     return res.status(500).json({ error: "Failed to fetch preview" });
   }
 };

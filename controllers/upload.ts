@@ -28,7 +28,6 @@ export const uploadImage = async (req: Request, res: Response) => {
 
     return res.json({ url: result.secure_url });
   } catch (err) {
-    console.error(err);
     return res.status(500).json({ error: "Upload failed" });
   }
 };

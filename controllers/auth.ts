@@ -25,7 +25,6 @@ export const login = async (req: Request, res: Response) => {
 
     // 1. Define options with explicit type
     const signOptions: SignOptions = {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       expiresIn: (process.env.JWT_EXPIRES_IN || "7d") as any,
     };
 
@@ -38,7 +37,6 @@ export const login = async (req: Request, res: Response) => {
 
     return res.json({ token, user: { id: user._id, email: user.email } });
   } catch (err) {
-    console.error(err);
     return res.status(500).json({ error: "Server error" });
   }
 };

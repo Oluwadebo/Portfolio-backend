@@ -14,7 +14,6 @@ import auth from "./routes/auth";
 import project from "./routes/project";
 import upload from "./routes/upload";
 import view from "./routes/view";
-// import Settings from "../../routes/Settings";
 import Settings from "./routes/Settings";
 
 dotenv.config();
@@ -61,7 +60,6 @@ app.use(
     res: express.Response,
     _next: express.NextFunction,
   ) => {
-    console.error(err.stack);
     res.status(500).json({ error: "Internal server error" });
   },
 );
