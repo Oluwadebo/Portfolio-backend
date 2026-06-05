@@ -69,19 +69,19 @@ app.use(
 connectDB();
 
 
-// ─── Keep alive (prevents Render free tier sleep) ──
-const SELF_URL = process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
+// // ─── Keep alive (prevents Render free tier sleep) ──
+// const SELF_URL = process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
 
-if (process.env.NODE_ENV === "production") {
-  setInterval(async () => {
-    try {
-      await fetch(`${SELF_URL}/health`);
-      console.log("[Keep-alive] Pinged successfully");
-    } catch (err) {
-      console.warn("[Keep-alive] Ping failed:", err);
-    }
-  }, 10 * 60 * 1000); // every 10 minutes
-}
+// if (process.env.NODE_ENV === "production") {
+//   setInterval(async () => {
+//     try {
+//       await fetch(`${SELF_URL}/health`);
+//       console.log("[Keep-alive] Pinged successfully");
+//     } catch (err) {
+//       console.warn("[Keep-alive] Ping failed:", err);
+//     }
+//   }, 10 * 60 * 1000); // every 10 minutes
+// }
 
 app.listen(PORT, () => {
   console.log(`\n🚀 Backend running on http://localhost:${PORT}`);
