@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import Project from "../models/Project";
 import { z } from "zod";
+import Project from "../models/Project";
 
 const projectSchema = z.object({
   title: z.string().min(1),
@@ -14,13 +14,29 @@ const projectSchema = z.object({
 });
 
 export const getAllProjects = async (_req: Request, res: Response) => {
+  const page = parseInt(_req.query.page as string) || 1;
+  const limit = parseInt(_req.query.limit as string) || 6;
+  const skip = (page - 1) * limit;
+
   try {
-    const projects = await Project.find().sort({
-      featured: -1,
-      order: 1,
-      createdAt: -1,
+    const [projects, total] = await Promise.all([
+      Project.find()
+        .sort({
+          featured: -1,
+          //  order: 1,
+          // createdAt: -1,
+        })
+        .skip(skip)
+        .limit(limit),
+      Project.countDocuments(),
+    ]);
+    return res.json({
+      projects,
+      total,
+      page,
+      totalPages: Math.ceil(total / limit),
+      hasMore: page * limit < total,
     });
-    return res.json(projects);
   } catch (err) {
     return res.status(500).json({ error: "Failed to fetch projects" });
   }

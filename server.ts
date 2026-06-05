@@ -12,9 +12,9 @@ import { connectDB } from "./config/db";
 import analytics from "./routes/analytics";
 import auth from "./routes/auth";
 import project from "./routes/project";
+import Settings from "./routes/Settings";
 import upload from "./routes/upload";
 import view from "./routes/view";
-import Settings from "./routes/Settings";
 
 dotenv.config();
 
@@ -27,10 +27,10 @@ app.use(helmet());
 app.use(
   cors({
     origin: [
-  "http://localhost:3000",
-  process.env.ALLOWED_ORIGIN || "",
-  process.env.NEXT_PUBLIC_APP_URL || "",
-].filter(Boolean),
+      "http://localhost:3000",
+      process.env.ALLOWED_ORIGIN || "",
+      process.env.NEXT_PUBLIC_APP_URL || "",
+    ].filter(Boolean),
   }),
 );
 app.use(morgan("dev"));
