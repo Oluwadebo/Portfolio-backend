@@ -40,6 +40,7 @@ app.use(express.urlencoded({ extended: true }));
 // ─── Routes ────────────────────────────────────────
 app.use("/api/auth", auth);
 app.use("/api/projects", project);
+// app.use("/api/projects", project);
 app.use("/api/analytics", analytics);
 app.use("/api/upload", upload);
 app.use("/api/view", view);

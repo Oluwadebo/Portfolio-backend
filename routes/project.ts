@@ -3,6 +3,7 @@ import {
   createProject,
   deleteProject,
   getAllProjects,
+  getAllProjectsAdmin,
   trackProjectClick,
   updateProject,
 } from "../controllers/project";
@@ -12,6 +13,7 @@ const router = Router();
 
 // ─── Public ────────────────────────────────────────
 router.get("/", getAllProjects);
+router.get("/admin", getAllProjectsAdmin);
 router.post("/:id/click", trackProjectClick); // track link clicks
 
 // ─── Protected (admin only) ────────────────────────

@@ -23,8 +23,9 @@ export const getAllProjects = async (_req: Request, res: Response) => {
       Project.find()
         .sort({
           featured: -1,
-          //  order: 1,
-          // createdAt: -1,
+          order: 1,
+          createdAt: -1,
+          _id: 1,
         })
         .skip(skip)
         .limit(limit),
@@ -36,6 +37,26 @@ export const getAllProjects = async (_req: Request, res: Response) => {
       page,
       totalPages: Math.ceil(total / limit),
       hasMore: page * limit < total,
+    });
+  } catch (err) {
+    return res.status(500).json({ error: "Failed to fetch projects" });
+  }
+};
+export const getAllProjectsAdmin = async (_req: Request, res: Response) => {
+  try {
+    const projects = await Project.find().sort({
+      featured: -1,
+      order: 1,
+      createdAt: -1,
+      _id: 1,
+    });
+
+    return res.json({
+      projects,
+      total: projects.length,
+      page: 1,
+      totalPages: 1,
+      hasMore: false,
     });
   } catch (err) {
     return res.status(500).json({ error: "Failed to fetch projects" });
